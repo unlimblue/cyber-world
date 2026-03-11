@@ -150,15 +150,15 @@ sequenceDiagram
     participant M as 🎯 Master
     participant R as 🔮 Revelator
     
-    Note over H,M,R: 阶段 1: 方案设计
+    Note over H: 阶段 1: 方案设计
     H->>M: @Master 设计一个方案
     M->>H: 方案设计完毕（无@）
     
-    Note over H,M,R: 阶段 2: 风险审视
+    Note over H: 阶段 2: 风险审视
     H->>R: @Revelator 分析一下风险
     R->>H: 发现风险点（无@）
     
-    Note over H,M,R: 阶段 3: 完善执行
+    Note over H: 阶段 3: 完善执行
     H->>M: @Master 按建议修改
     M->>R: @Revelator 确认覆盖
     R->>M: 确认完毕（无@）
