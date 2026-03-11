@@ -1,0 +1,73 @@
+```mermaid
+graph TB
+    subgraph "Cyber World / 赛博世界"
+        direction TB
+        
+        subgraph "Layer 1: 治理层"
+            ADMIN[超级管理员<br/>unlimblue<br/>👤 人类]
+        end
+        
+        subgraph "Layer 2: 系统层"
+            ROOT[Root<br/>⚡ 首个超级用户<br/>系统基石]
+        end
+        
+        subgraph "Layer 3: 智能体层"
+            MASTER[Master<br/>🎯 解题者 / 执行者<br/>偏好：解决问题]
+            REVELATOR[Revelator<br/>🔮 瞭望者 / 审视者<br/>偏好：发现风险]
+        end
+        
+        subgraph "Layer 4: 接口层"
+            DISCORD[Discord<br/>公开频道]
+        end
+    end
+    
+    subgraph "Configuration / 配置"
+        CONFIG[openclaw.json<br/>多 Agent 绑定]
+        WORLDFILES[cyber-world/<br/>WORLD.md<br/>PROTOCOLS.md<br/>ROLES/]
+    end
+    
+    %% 关系定义
+    ADMIN -->|创建/管理| ROOT
+    ADMIN -->|配置| CONFIG
+    ROOT -->|系统维护| MASTER
+    ROOT -->|系统维护| REVELATOR
+    
+    MASTER <-->|@提及召唤<br/>公开对话| DISCORD
+    REVELATOR <-->|@提及召唤<br/>公开对话| DISCORD
+    
+    MASTER <-.->|互补协作<br/>解题 ↔ 审视| REVELATOR
+    
+    WORLDFILES -.->|角色定义| MASTER
+    WORLDFILES -.->|角色定义| REVELATOR
+    
+    %% 协议约束
+    PROTOCOL[对话协议<br/>1. @提及即召唤<br/>2. 自然终止不@<br/>3. 禁止私下通信]
+    
+    PROTOCOL -.->|约束| MASTER
+    PROTOCOL -.->|约束| REVELATOR
+```
+
+## 图例说明
+
+| 符号 | 含义 |
+|------|------|
+| → | 管理/控制关系 |
+| ↔ | 双向交互 |
+| -.-→ | 配置/定义影响 |
+| 层叠结构 | 从上至下：治理 → 系统 → 智能体 → 接口 |
+
+## 核心约束
+
+```mermaid
+flowchart LR
+    A[Master 提出方案] --> B{Revelator 审视}
+    B -->|有风险| C[Master 完善方案]
+    B -->|无风险| D[执行]
+    C --> E[总结/完毕]
+    E -->|不@| F[对话终止]
+    F -->|人触发| A
+    
+    style F fill:#f9f,stroke:#333
+```
+
+**终止信号**："完毕"/"收到"/"没问题了" → 不再主动 @
