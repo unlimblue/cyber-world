@@ -38,14 +38,10 @@ Root 自动执行：
 
 ```mermaid
 flowchart TB
-    Start([每日 00:00]) --> Read[读取当日<br/>memory/YYYY-MM-DD.md]
-    Read --> Extract[提取重要决策<br/>和关键事件]
-    Extract --> Summary[生成摘要报告]
-    Summary --> Check{有重要<br/>更新?}
-    Check -->|是| Commit[提交到 GitHub]
-    Check -->|否| Skip[跳过提交]
-    Commit --> Notify[发送摘要到 Discord]
-    Skip --> Notify
+    Start([每日 00:00]) --> Collect[汇总 Discord<br/>频道重要对话]
+    Collect --> Create[创建/更新<br/>memory/YYYY-MM-DD.md]
+    Create --> Commit[提交到 GitHub]
+    Commit --> Notify[发送摘要到<br/>Discord #研发中心]
     Notify --> End([结束])
     
     style Start fill:#4CAF50,color:#fff
@@ -57,13 +53,11 @@ flowchart TB
 
 | 步骤 | 操作 | 输出 |
 |:----:|------|------|
-| 1 | 读取当日记忆文件 | 原始日志内容 |
-| 2 | 提取重要决策 | 决策列表 |
-| 3 | 提取关键事件 | 事件列表 |
-| 4 | 生成摘要 | 结构化报告 |
-| 5 | 判断是否提交 | 有重要内容则提交 |
-| 6 | GitHub 同步 | 更新仓库 |
-| 7 | Discord 通知 | 发送摘要到频道 |
+| 1 | 汇总 Discord 频道重要对话 | 原始对话记录 |
+| 2 | 提取重要决策和事件 | 结构化内容 |
+| 3 | 创建/更新 memory/YYYY-MM-DD.md | 记忆文件 |
+| 4 | 提交到 GitHub | 仓库更新 |
+| 5 | 发送摘要到 Discord | 频道通知 |
 
 ---
 
