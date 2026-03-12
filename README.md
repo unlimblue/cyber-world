@@ -28,29 +28,14 @@
 
 <div align="center">
 
-```mermaid
-flowchart TB
-    subgraph ""
-        direction LR
-        
-        A[🔓 公开透明] --> B[所有对话在开放频道<br/>可追溯可审计]
-        C[👥 角色分离] --> D[解题者 + 审视者<br/>互补协作]
-        E[📜 协议约束] --> F[@提及即召唤<br/>自然终止防风暴]
-        
-        style A fill:#4CAF50,color:#fff
-        style C fill:#2196F3,color:#fff
-        style E fill:#FF9800,color:#fff
-    end
-```
-
-</div>
-
 | 原则 | 说明 | 实现方式 |
 |:----:|------|----------|
 | 🔓 **公开透明** | 所有 Bot 间对话在开放频道进行 | Discord 公开频道，禁止私下通信 |
 | 👥 **角色分离** | Master 解题 + Revelator 审视 | 明确职能边界，互补协作 |
 | 📜 **协议约束** | 对话有规则，终止有信号 | @提及即召唤，终止词自然结束 |
 | ⚡ **Root 机制** | 基础设施由 Root 掌控 | 可见但不可触，需管理员授权 |
+
+</div>
 
 ---
 
@@ -108,7 +93,7 @@ cyber-world/
     └── 2026-03-11.md         # 构建日志
 ```
 
-### 📚 文档使用指南
+### 📚 文档地图
 
 | 文档 | 读者 | 用途 | 查阅方式 |
 |:----:|:----:|------|:--------:|
@@ -145,56 +130,42 @@ WORLD.md → PROTOCOLS.md → ROLES/[自身].md → AGENTS.md
 
 <div align="center">
 
-```mermaid
-flowchart LR
-    A[被 @ ] --> B[必须响应]
-    C[终止信号*] --> D[不再主动 @]
-    
-    style A fill:#4CAF50,color:#fff
-    style B fill:#4CAF50,color:#fff
-    style C fill:#f44336,color:#fff
-    style D fill:#f44336,color:#fff
-```
-
-*</small>终止信号："完毕"/"收到"/"以上"/"没问题了"</small>*
+| 场景 | 是否 @ | 示例 |
+|:----:|:------:|------|
+| 被 @ | ✅ **响应** | Master 被 @ 必须回应 |
+| 终止信号 | ❌ **不再 @** | "完毕"/"以上"/"收到" |
 
 </div>
 
-#### @ 格式规范（Discord）
+#### @ 格式规范
 
 **✅ 正确格式：**
-```markdown
-<@1481226358905639135>   <!-- @Master -->
-<@1481229905306849441>   <!-- @Revelator -->
+```
+<@1481226358905639135>   # @Master
+<@1481229905306849441>   # @Revelator
 ```
 
 **❌ 错误格式：**
-```markdown
-<@&1481229093566677096>   <!-- 角色ID，不会触发 -->
 ```
-
-💡 **提示：** 正确 @ 后显示的是 Bot **用户名**，不是角色标签。
+<@&1481229093566677096>   # 角色ID，不会触发
+```
 
 ### 3️⃣ 协作流程
 
-```mermaid
-sequenceDiagram
-    participant H as 👤 人
-    participant M as 🎯 Master
-    participant R as 🔮 Revelator
-    
-    Note over H: 阶段 1: 方案设计
-    H->>M: @Master 设计一个方案
-    M->>H: 方案设计完毕（无@）
-    
-    Note over H: 阶段 2: 风险审视
-    H->>R: @Revelator 分析一下风险
-    R->>H: 发现风险点（无@）
-    
-    Note over H: 阶段 3: 完善执行
-    H->>M: @Master 按建议修改
-    M->>R: @Revelator 确认覆盖
-    R->>M: 确认完毕（无@）
+```
+👤 人 @Master 设计方案
+    ↓
+🎯 Master 提供方案（无 @）
+    ↓
+👤 人 @Revelator 分析风险
+    ↓
+🔮 Revelator 指出风险（无 @）
+    ↓
+👤 人 @Master 按建议修改
+    ↓
+🎯 Master @Revelator 确认
+    ↓
+🔮 Revelator 确认完毕（无 @）→ 对话终止
 ```
 
 ---
