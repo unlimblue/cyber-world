@@ -83,14 +83,23 @@ graph TB
 ```
 cyber-world/
 ├── 📄 README.md              # 本文件：世界概览
-├── 📄 WORLD.md               # 世界总纲：背景、准则、成员
-├── 📄 PROTOCOLS.md           # 多 Bot 对话协议 ⭐【Bot 必读】
-├── 📄 IDENTITIES.md          # Discord 身份信息【参考】
-├── 🗂️ ROLES/
-│   ├── master.md             # 🎯 Master 角色定义【Master 必读】
-│   └── revelator.md          # 🔮 Revelator 角色定义【Revelator 必读】
+├── 📄 BUILD.md               # 使用说明
+├── 🗂️ workspace-template/    # 工作空间模板【Bot 启动必读】
+│   ├── 📄 WORLD.md           # 世界总纲：背景、准则、成员
+│   ├── 📄 PROTOCOLS.md       # 多 Bot 对话协议 ⭐【Bot 必读】
+│   ├── 📄 IDENTITIES.md      # Discord 身份信息【参考】
+│   ├── 🗂️ ROLES/
+│   │   ├── root/             # ⚡ Root 角色定义
+│   │   │   ├── SOUL.md
+│   │   │   └── IDENTITY.md
+│   │   ├── master/           # 🎯 Master 角色定义【Master 必读】
+│   │   │   ├── SOUL.md
+│   │   │   └── IDENTITY.md
+│   │   └── revelator/        # 🔮 Revelator 角色定义【Revelator 必读】
+│   │       ├── SOUL.md
+│   │       └── IDENTITY.md
+│   └── ...                   # 其他模板文件
 └── 🗂️ memory/                # 历史记录【归档】
-    └── 2026-03-11.md         # 构建日志
 ```
 
 ### 📚 文档地图
@@ -98,21 +107,23 @@ cyber-world/
 | 文档 | 读者 | 用途 | 查阅方式 |
 |:----:|:----:|------|:--------:|
 | **README.md** | 人类 | 项目入口、快速开始 | 手动阅读 |
+| **BUILD.md** | 人类 | 如何使用模板 | 手动阅读 |
 | **WORLD.md** | Bot | 世界背景、成员架构 | **启动必读** |
 | **PROTOCOLS.md** | Bot | 对话规则、Root 协作机制 | **启动必读** |
-| **ROLES/*.md** | Bot | 自身角色定义、行为准则 | **启动必读** |
+| **ROLES/*/SOUL.md** | Bot | 自身角色定义、行为准则 | **启动必读** |
 | **IDENTITIES.md** | Bot/人 | ID 查询、分工速查 | 按需查阅 |
 | **memory/*.md** | 人 | 历史记录、决策归档 | 手动阅读 |
 
 **Bot 启动读取流程：**
 ```
-WORLD.md → PROTOCOLS.md → ROLES/[自身].md → AGENTS.md
+WORLD.md → PROTOCOLS.md → ROLES/[自身]/SOUL.md → ROLES/[自身]/IDENTITY.md → AGENTS.md
 ```
 
 ### 👤 Bot 身份信息
 
 | Bot | 用户名 | Discord ID | 角色 |
 |:---:|:------:|:----------:|:----:|
+| ⚡ Root | Root#8679 | `1480773355555520684` | 系统基石 |
 | 🎯 Master | Master#8182 | `1481226358905639135` | 解题者 |
 | 🔮 Revelator | Revelator#0464 | `1481229905306849441` | 审视者 |
 
@@ -184,7 +195,7 @@ WORLD.md → PROTOCOLS.md → ROLES/[自身].md → AGENTS.md
 ## 📊 项目状态
 
 - **阶段：** 构建初期 / 实验运行
-- **成员：** 3（Root + Master + Revelator）
+- **成员：** 4（超级管理员 + Root + Master + Revelator）
 - **状态：** 🟢 运行中
 
 ---

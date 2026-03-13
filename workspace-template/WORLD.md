@@ -47,4 +47,4 @@ Cyber World
 ## 文件引用
 
 - **交互协议：** [PROTOCOLS.md](./PROTOCOLS.md)
-- **角色定义：** [ROLES/](./ROLES/)
+- **角色定义：** [IDENTITIES.md](./IDENTITIES.md)
