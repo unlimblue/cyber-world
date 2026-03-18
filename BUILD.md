@@ -96,19 +96,55 @@ cp -r cyber-world/workspace-template/ROLES/* .
 
 ## 🔧 自定义配置
 
-### 编辑本地配置
+### 第一步：配置身份信息（必须）
 
-复制模板后，按需修改以下文件：
+复制模板后，**首先**编辑 `IDENTITIES.md`，将占位符替换为实际的 Discord ID：
 
 ```bash
-# 1. 编辑工具配置（摄像头、SSH、TTS 等）
+vim IDENTITIES.md
+```
+
+**需要替换的占位符：**
+
+| 占位符 | 说明 | 获取方式 |
+|--------|------|----------|
+| `{{ADMIN_NAME}}` | 你的 Discord 用户名 | 查看个人资料 |
+| `{{ADMIN_USER_ID}}` | 你的 Discord 用户 ID | 开启开发者模式，右键头像复制 |
+| `{{ROOT_USER_ID}}` | Root Bot 的用户 ID | 同上 |
+| `{{MASTER_USER_ID}}` | Master Bot 的用户 ID | 同上 |
+| `{{REVELATOR_USER_ID}}` | Revelator Bot 的用户 ID | 同上 |
+| `{{GUILD_ID}}` | Discord 服务器 ID | 右键服务器图标复制 |
+| `{{MAIN_CHANNEL_ID}}` | 主频道 ID | 右键频道复制 |
+
+### 第二步：配置用户偏好
+
+编辑 `USER.md`，设置管理员信息：
+
+```bash
+vim USER.md
+```
+
+**示例配置：**
+```markdown
+- **Name:** unlimblue
+
+## 交流偏好
+
+- **时区:** UTC+8
+- **风格:** 高信息密度、理性、批判性、简洁
+- **工作流:** 研究 → 授权 → 实现（严禁越界）
+```
+
+### 第三步：编辑其他配置
+
+按需修改以下文件：
+
+```bash
+# 编辑工具配置（摄像头、SSH、TTS 等）
 vim TOOLS.md
 
-# 2. 编辑心跳任务
+# 编辑心跳任务
 vim HEARTBEAT.md
-
-# 3. 编辑用户偏好
-vim USER.md
 ```
 
 ### 启动读取顺序
@@ -163,6 +199,12 @@ docsify serve .
 ---
 
 ## ⚡ 常见问题
+
+**Q: 复制后第一步做什么？**  
+A: **立即编辑 `IDENTITIES.md`**，将所有 `{{占位符}}` 替换为实际的 Discord ID。这是 Bot 正常工作的前提。
+
+**Q: 如何获取 Discord ID？**  
+A: Discord 设置 → 高级 → 开启开发者模式 → 右键用户/频道/服务器 → 复制 ID。
 
 **Q: 复制后需要删除哪些文件？**  
 A: `BOOTSTRAP.md` 在首次启动完成后可删除；不需要的角色目录可删除。

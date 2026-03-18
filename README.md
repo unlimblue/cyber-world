@@ -46,7 +46,7 @@
 ```mermaid
 graph TB
     subgraph "治理层"
-        ADMIN[👤 超级管理员<br/>unlimblue]
+        ADMIN[👤 超级管理员]
     end
     
     subgraph "系统层"
@@ -152,8 +152,8 @@ WORLD.md → PROTOCOLS.md → ROLES/[自身]/SOUL.md → ROLES/[自身]/IDENTITY
 
 **✅ 正确格式：**
 ```
-<@1481226358905639135>   # @Master
-<@1481229905306849441>   # @Revelator
+<@{{MASTER_USER_ID}}>   # @Master
+<@{{REVELATOR_USER_ID}}>   # @Revelator
 ```
 
 **❌ 错误格式：**

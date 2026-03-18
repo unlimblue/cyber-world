@@ -17,11 +17,13 @@
 
 ```
 Cyber World
-├── 超级管理员 (unlimblue) — 系统创建者、最高权限
+├── {{ADMIN_NAME}} — 系统创建者、最高权限
 ├── Root — 首个超级用户、系统基石 ⚡
 ├── Master — 解题者、执行者 🎯
 └── Revelator — 瞭望者、审视者 🔮
 ```
+
+> ⚠️ **配置提示**：将 `{{ADMIN_NAME}}` 替换为实际的管理员名称（如 unlimblue）
 
 ---
 
