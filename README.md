@@ -78,6 +78,34 @@ graph TB
 
 ## 🚀 快速开始
 
+赛博世界采用 **Agent 引导配置** 模式，无需手动编辑配置文件：
+
+<div align="center">
+
+```mermaid
+flowchart LR
+    A[人类启动] --> B[Agent 读取 BUILD.md]
+    B --> C[识别待配置项]
+    C --> D[向人类询问]
+    D --> E[人类提供值]
+    E --> F[Agent 更新配置]
+    F --> G[验证完成]
+    G --> H[赛博世界就绪]
+    
+    style A fill:#f9f,stroke:#333
+    style H fill:#9f9,stroke:#333
+```
+
+</div>
+
+**使用方式：**
+1. 复制 `workspace-template/` 到目标工作空间
+2. 在 Discord 频道 @Root 或 @Master："请配置赛博世界"
+3. Agent 自动引导完成所有配置（Discord ID、Bot 信息等）
+4. 配置完成后即可开始使用
+
+---
+
 ### 📂 目录结构
 
 ```
