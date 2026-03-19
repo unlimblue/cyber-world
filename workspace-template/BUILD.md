@@ -14,7 +14,16 @@
 
 ---
 
-## 📋 配置流程
+## 📋 配置流程总览
+
+赛博世界配置分为 **两个层级**：
+
+1. **工作空间层**（本文档管理）— `IDENTITIES.md`, `USER.md` 等模板文件
+2. **OpenClaw Gateway 层**（需人工配置）— `~/.openclaw/openclaw.json`
+
+---
+
+## 第一阶段：工作空间配置
 
 ### 步骤 1：扫描待配置项
 
@@ -77,7 +86,7 @@ ADMIN_USER_ID=123456
 2. **执行替换**：使用 edit 工具替换每个占位符
 3. **报告进度**：每完成一个文件报告一次
 
-### 步骤 4：验证配置
+### 步骤 4：验证工作空间配置
 
 检查所有 `{{}}` 占位符是否已替换：
 
@@ -85,14 +94,212 @@ ADMIN_USER_ID=123456
 grep -r '{{.*}}' *.md 2>/dev/null || echo "所有占位符已填充"
 ```
 
-向人类报告：
-```
-✅ 配置完成！
-- IDENTITIES.md: 已更新
-- USER.md: 已更新
-- 剩余占位符: 0
+---
 
-赛博世界已就绪，可以开始使用了。
+## 第二阶段：OpenClaw Gateway 配置
+
+⚠️ **注意**：以下配置需要人工编辑 `~/.openclaw/openclaw.json`，Agent 仅提供指导和检查。
+
+### 2.1 Agent 定义配置
+
+**路径**: `~/.openclaw/openclaw.json` → `agents.list`
+
+每个 Bot 需要独立配置：
+
+```json
+{
+  "agents": {
+    "list": [
+      {
+        "id": "main"
+      },
+      {
+        "id": "master",
+        "name": "master",
+        "workspace": "{{MASTER_WORKSPACE_PATH}}",
+        "agentDir": "{{OPENCLAW_DIR}}/agents/master/agent",
+        "model": "kimi-coding/k2p5",
+        "groupChat": {
+          "mentionPatterns": [
+            "@master", 
+            "@Master", 
+            "<@{{MASTER_USER_ID}}>"
+          ]
+        }
+      },
+      {
+        "id": "revelator",
+        "name": "revelator", 
+        "workspace": "{{REVELATOR_WORKSPACE_PATH}}",
+        "agentDir": "{{OPENCLAW_DIR}}/agents/revelator/agent",
+        "model": "kimi-coding/k2p5",
+        "groupChat": {
+          "mentionPatterns": [
+            "@revelator",
+            "@Revelator", 
+            "<@{{REVELATOR_USER_ID}}>"
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+
+**配置项说明：**
+| 字段 | 说明 | 示例 |
+|------|------|------|
+| `id` | Agent 唯一标识 | `master`, `revelator` |
+| `workspace` | 工作空间路径 | `~/.openclaw/workspace-master` |
+| `agentDir` | Agent 配置目录 | `~/.openclaw/agents/master/agent` |
+| `model` | 使用的模型 | `kimi-coding/k2p5` |
+| `mentionPatterns` | @提及触发规则 | 需包含占位符中的 Discord ID |
+
+### 2.2 Discord 绑定配置
+
+**路径**: `~/.openclaw/openclaw.json` → `bindings`
+
+绑定 Agent 到 Discord 频道：
+
+```json
+{
+  "bindings": [
+    {
+      "agentId": "master",
+      "match": {
+        "channel": "discord",
+        "accountId": "master",
+        "guildId": "{{GUILD_ID}}"
+      }
+    },
+    {
+      "agentId": "revelator",
+      "match": {
+        "channel": "discord",
+        "accountId": "revelator",
+        "guildId": "{{GUILD_ID}}"
+      }
+    }
+  ]
+}
+```
+
+### 2.3 Discord 账号配置
+
+**路径**: `~/.openclaw/openclaw.json` → `channels.discord.accounts`
+
+需要为每个 Bot 创建 Discord Application 并获取 Token：
+
+```json
+{
+  "channels": {
+    "discord": {
+      "accounts": {
+        "default": {
+          "token": "{{ROOT_BOT_TOKEN}}",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "{{GUILD_ID}}": {
+              "requireMention": true
+            }
+          }
+        },
+        "master": {
+          "enabled": true,
+          "token": "{{MASTER_BOT_TOKEN}}",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "{{GUILD_ID}}": {
+              "requireMention": true
+            }
+          }
+        },
+        "revelator": {
+          "enabled": true,
+          "token": "{{REVELATOR_BOT_TOKEN}}",
+          "groupPolicy": "allowlist",
+          "guilds": {
+            "{{GUILD_ID}}": {
+              "requireMention": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+**获取 Bot Token 步骤：**
+1. 访问 https://discord.com/developers/applications
+2. 创建 New Application
+3. 进入 Bot 标签页 → Add Bot
+4. 复制 Token（仅显示一次，务必保存）
+
+### 2.4 Gateway 基础配置
+
+**路径**: `~/.openclaw/openclaw.json` → `gateway`
+
+```json
+{
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "{{GATEWAY_TOKEN}}"
+    }
+  }
+}
+```
+
+### 2.5 模型配置
+
+**路径**: `~/.openclaw/openclaw.json` → `models`
+
+```json
+{
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "kimi-coding": {
+        "baseUrl": "https://api.kimi.com/coding/",
+        "api": "anthropic-messages",
+        "models": [
+          {
+            "id": "k2p5",
+            "name": "Kimi for Coding",
+            "reasoning": true
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+---
+
+## 第三阶段：验证完整配置
+
+### 检查清单
+
+- [ ] `IDENTITIES.md` 中所有占位符已替换
+- [ ] `USER.md` 中所有占位符已替换
+- [ ] `~/.openclaw/openclaw.json` 中 `agents.list` 定义了 master 和 revelator
+- [ ] `~/.openclaw/openclaw.json` 中 `bindings` 绑定了 Discord 频道
+- [ ] `~/.openclaw/openclaw.json` 中 `channels.discord.accounts` 配置了 Bot tokens
+- [ ] 每个 Bot 的 `mentionPatterns` 包含正确的 Discord ID
+
+### 启动验证
+
+```bash
+# 检查 Gateway 状态
+openclaw gateway status
+
+# 检查 Bot 是否在线
+openclaw status
 ```
 
 ---
@@ -100,8 +307,9 @@ grep -r '{{.*}}' *.md 2>/dev/null || echo "所有占位符已填充"
 ## ⚠️ 安全规范
 
 1. **修改前必须获得明确授权** — 人类说"确认"后才执行 edit
-2. **敏感信息处理** — tokens/keys 不存储在这些文件中（由 OpenClaw 管理）
+2. **敏感信息处理** — tokens/keys 存储在 `~/.openclaw/openclaw.json`，不在工作空间文件中
 3. **错误处理** — 如果某个值不确定，保留占位符并说明原因
+4. **权限边界** — Agent 不直接修改 `~/.openclaw/openclaw.json`，仅提供指导和检查
 
 ---
 
@@ -120,6 +328,7 @@ grep -r '{{.*}}' *.md 2>/dev/null || echo "所有占位符已填充"
 | `HEARTBEAT.md` | 心跳任务配置（可选） | 所有 Bot |
 | `ROLES/*/SOUL.md` | 角色灵魂定义 | 对应角色 Bot |
 | `ROLES/*/IDENTITY.md` | 角色身份信息 | 对应角色 Bot |
+| `~/.openclaw/openclaw.json` | Gateway 配置、模型、绑定 | OpenClaw Gateway |
 
 ---
 
