@@ -151,9 +151,11 @@ WORLD.md → PROTOCOLS.md → ROLES/[自身]/SOUL.md → ROLES/[自身]/IDENTITY
 
 | Bot | 用户名 | Discord ID | 角色 |
 |:---:|:------:|:----------:|:----:|
-| ⚡ Root | Root#8679 | `1480773355555520684` | 系统基石 |
-| 🎯 Master | Master#8182 | `1481226358905639135` | 解题者 |
-| 🔮 Revelator | Revelator#0464 | `1481229905306849441` | 审视者 |
+| ⚡ Root | Root#{{ROOT_DISCRIMINATOR}} | `{{ROOT_USER_ID}}` | 系统基石 |
+| 🎯 Master | Master#{{MASTER_DISCRIMINATOR}} | `{{MASTER_USER_ID}}` | 解题者 |
+| 🔮 Revelator | Revelator#{{REVELATOR_DISCRIMINATOR}} | `{{REVELATOR_USER_ID}}` | 审视者 |
+
+> ⚠️ **配置提示**：将占位符替换为实际的 Discord ID（参见 IDENTITIES.md）
 
 ---
 
@@ -186,7 +188,7 @@ WORLD.md → PROTOCOLS.md → ROLES/[自身]/SOUL.md → ROLES/[自身]/IDENTITY
 
 **❌ 错误格式：**
 ```
-<@&1481229093566677096>   # 角色ID，不会触发
+<@&{{ROLE_ID}}>   # 角色ID，不会触发
 ```
 
 ### 3️⃣ 协作流程
