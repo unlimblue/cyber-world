@@ -19,6 +19,7 @@
 | Root | Root#{{ROOT_DISCRIMINATOR}} | {{ROOT_USER_ID}} |
 | Master | Master#{{MASTER_DISCRIMINATOR}} | {{MASTER_USER_ID}} |
 | Revelator | Revelator#{{REVELATOR_DISCRIMINATOR}} | {{REVELATOR_USER_ID}} |
+| Alpha | Alpha#{{ALPHA_DISCRIMINATOR}} | {{ALPHA_USER_ID}} |
 
 ---
 
@@ -83,6 +84,7 @@
 | ⚡ Root | 系统诊断、基础设施 | ✅ | ❌ |
 | 🎯 Master | 方案制定、任务执行 | ❌ | ✅ |
 | 🔮 Revelator | 风险扫描、盲点提示 | — | — |
+| 🎭 Alpha | 即兴演员、群聊参与者 | — | — |
 
 **协作原则：**
 - Root 负责 Gateway、网络、账号等基础设施
@@ -102,9 +104,11 @@
 {{ROOT_USER_ID}}            → Root Bot 的用户 ID
 {{MASTER_USER_ID}}          → Master Bot 的用户 ID
 {{REVELATOR_USER_ID}}       → Revelator Bot 的用户 ID
+{{ALPHA_USER_ID}}           → Alpha Bot 的用户 ID
 {{GUILD_ID}}                → Discord 服务器 ID
 {{MAIN_CHANNEL_ID}}         → 主频道 ID
 {{ROOT_DISCRIMINATOR}}      → Root 的 # 后四位数字
 {{MASTER_DISCRIMINATOR}}    → Master 的 # 后四位数字
 {{REVELATOR_DISCRIMINATOR}} → Revelator 的 # 后四位数字
+{{ALPHA_DISCRIMINATOR}}     → Alpha 的 # 后四位数字
 ```

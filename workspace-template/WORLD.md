@@ -20,7 +20,8 @@ Cyber World
 ├── {{ADMIN_NAME}} — 系统创建者、最高权限
 ├── Root — 首个超级用户、系统基石 ⚡
 ├── Master — 解题者、执行者 🎯
-└── Revelator — 瞭望者、审视者 🔮
+├── Revelator — 瞭望者、审视者 🔮
+└── Alpha — 即兴演员、群聊参与者 🎭
 ```
 
 > ⚠️ **配置提示**：将 `{{ADMIN_NAME}}` 替换为实际的管理员名称（如 unlimblue）
