@@ -32,7 +32,7 @@
 
 ```mermaid
 graph TB
-    A[👤 {{ADMIN_NAME}}] --> R[⚡ Root]
+    A[👤 管理员] --> R[⚡ Root]
     R --> M[🎯 Master]
     R --> V[🔮 Revelator]
     M <---> D[Discord]
